@@ -36,6 +36,8 @@ class UsersController extends FOSRestController {
      * @return array List of users
      */
     public function getUsersAction() {
+        //here we should implement a paginated system (PaginatedRepresentation).
+        // to do simple, i have just selected all users
         return $this->getDoctrine()->getRepository('AppBundle:User')->findBy(array('enabled'=>true));
     }
 

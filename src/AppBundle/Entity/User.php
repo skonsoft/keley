@@ -24,12 +24,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *  @Hateoas\Relation(
  *      name="self",
  *      href = @Hateoas\Route(
- *          "api_1_get_user",
+ *          "get_user",
  *          parameters = {
  *              "id" = "expr(object.getId())"
  *          }
  *      ),
- *      exclusion = @Hateoas\Exclusion( groups={"list"})
+ *      exclusion = @Hateoas\Exclusion( groups={"list", "Default"})
  * )
  */
 class User {
