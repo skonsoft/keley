@@ -1,0 +1,12 @@
+nelmio_api_doc:
+    sandbox:
+        enabled: true
+        body_format:
+            formats:
+                # Defaults:
+                #- form
+                - json
+            default_format: "json" # One of "form"; "json"
+    cache:
+        enabled: true
+    name: "Keley API Documentation"

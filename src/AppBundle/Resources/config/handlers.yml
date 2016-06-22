@@ -1,0 +1,10 @@
+services:
+    app.abstract_handler:
+        class: AppBundle\Handler\ResourceHandler
+        arguments: [@doctrine.orm.entity_manager, @form.factory, @request_stack]
+        
+    app.user_handler:
+        class: AppBundle\Handler\UserHandler
+        parent: "app.abstract_handler"
+        calls:
+            - [setFormType, ['@app.user_type']]
