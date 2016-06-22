@@ -1,4 +1,7 @@
 keley
 =====
 
-A Symfony project created on June 22, 2016, 4:20 pm.
+After running composer install and updating schema, just open browser with URL to get the api sandbox:
+
+http://site.local/app_dev.php/api/v1/doc
+
