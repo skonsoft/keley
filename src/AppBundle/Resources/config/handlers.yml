@@ -8,3 +8,9 @@ services:
         parent: "app.abstract_handler"
         calls:
             - [setFormType, ['@app.user_type']]
+            
+    app.group_handler:
+        class: AppBundle\Handler\GroupHandler
+        parent: "app.abstract_handler"
+        calls:
+            - [setFormType, ['@app.group_type']]

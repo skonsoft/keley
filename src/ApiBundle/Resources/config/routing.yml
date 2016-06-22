@@ -1,3 +1,7 @@
 api_users:
     resource: 'ApiBundle\Controller\UsersController'
     type:     rest
+    
+api_groups:
+    resource: 'ApiBundle\Controller\GroupController'
+    type:     rest

@@ -4,12 +4,33 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * sGroup
  *
  * @ORM\Table(name="ss__group")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\GroupRepository")
+ * 
+ * @UniqueEntity("name")
+ * 
+ * @Serializer\ExclusionPolicy("all")
+ * @Serializer\XmlRoot("group")
+ * 
+ *  @Hateoas\Relation(
+ *      name="self",
+ *      href = @Hateoas\Route(
+ *          "get_group",
+ *          parameters = {
+ *              "id" = "expr(object.getId())"
+ *          }
+ *      ),
+ *      exclusion = @Hateoas\Exclusion( groups={"list", "Default"})
+ * )
+ * 
  */
 class Group {
 
@@ -25,7 +46,18 @@ class Group {
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * 
+     * @Assert\NotBlank(message="Le nom doit être renseigné")
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "255",
+     *      minMessage = "Le nom doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Le nom  ne peut pas être plus long que {{ limit }} caractères"
+     * )
+     * 
+     * @Serializer\Expose
+     * @Serializer\Groups({"list", "details"})
      */
     private $name;
 
