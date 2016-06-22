@@ -75,7 +75,7 @@ class UsersController extends FOSRestController {
      * {
      *      "email": "test@test.com",
      *      "firstname": "test",
-     *      "lastname": testina
+     *      "lastname": "testina"
      * }
      * </pre>
      * 
@@ -101,7 +101,7 @@ class UsersController extends FOSRestController {
                 '_format' => $request->get('_format')
             );
 
-            return $this->routeRedirectView('api_1_get_user', $routeOptions,
+            return $this->routeRedirectView('get_user', $routeOptions,
                                             Codes::HTTP_CREATED);
 
         } catch (InvalidFormException $e) {

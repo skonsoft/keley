@@ -1,6 +1,6 @@
 api_bundle:
     resource: "@ApiBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /v1
 
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"

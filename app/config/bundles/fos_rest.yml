@@ -15,4 +15,3 @@ fos_rest:
         default_engine: twig
     routing_loader:
         default_format: json
-    disable_csrf_role: ROLE_API

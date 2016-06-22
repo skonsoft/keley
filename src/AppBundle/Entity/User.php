@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Annotation as Serializer;
 use Hateoas\Configuration\Annotation as Hateoas;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * User
@@ -13,6 +15,8 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * @ORM\Table(name="ss__user")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\UserRepository")
  * @ORM\HasLifecycleCallbacks()
+ * 
+ * @UniqueEntity("email")
  * 
  * @Serializer\ExclusionPolicy("all")
  * @Serializer\XmlRoot("user")
@@ -47,6 +51,20 @@ class User {
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      * 
+     * @Assert\NotBlank(message="L'email doit être renseigné")
+     * @Assert\Length(
+     *      min = "5",
+     *      max = "255",
+     *      minMessage = "L'email doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "L'email  ne peut pas être plus long que {{ limit }} caractères"
+     * )
+     * 
+     * @Assert\Email(
+     *     message = "'{{ value }}' n'est pas un email valide.",
+     *     checkMX = true,
+     *     strict = false
+     * )
+     * 
      * @Serializer\Expose
      * @Serializer\Groups({"list", "details"})
      */
@@ -56,6 +74,14 @@ class User {
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
+     *
+     * @Assert\NotBlank(message="Le nom doit être renseigné")
+     * @Assert\Length(
+     *      min = "3",
+     *      max = "255",
+     *      minMessage = "Le prénom doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Le prénom  ne peut pas être plus long que {{ limit }} caractères"
+     * )
      * 
      * @Serializer\Expose
      * @Serializer\Groups({"details"})
@@ -66,6 +92,14 @@ class User {
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=255)
+     * 
+     * @Assert\NotBlank(message="Le nom doit être renseigné")
+     * @Assert\Length(
+     *      min = "3",
+     *      max = "255",
+     *      minMessage = "Le nom doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Le nom  ne peut pas être plus long que {{ limit }} caractères"
+     * )
      * 
      * @Serializer\Expose
      * @Serializer\Groups({"details"})
@@ -80,7 +114,7 @@ class User {
      * @Serializer\Expose
      * @Serializer\Groups({"details"})
      */
-    private $enabled;
+    private $enabled = false;
 
     /**
      * @var \DateTime
